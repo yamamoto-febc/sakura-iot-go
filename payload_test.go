@@ -22,13 +22,15 @@ var payloadTestJSONTemplate = `{
 var channelTestJSONInt = `{
     "channel": 1,
     "type": "i",
-    "value": 1
+    "value": 1,
+    "datetime":"2016-12-04T04:14:27.214224349Z"
 }`
 
 var channelTestJSONHexString = `{
     "channel": 2,
     "type": "b",
-    "value": "0f1e2d3c4b5c6b7a"
+    "value": "0f1e2d3c4b5c6b7a",
+    "datetime":"2016-12-04T04:14:27.214224349Z"
 }`
 
 var keepAliveTestJSON = `{"type": "keepalive", "datetime": "2016-06-11T06:24:50.643930807Z"}`

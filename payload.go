@@ -30,9 +30,10 @@ type InnerPayload struct {
 }
 
 type Channel struct {
-	Channel int64       `json:"channel"`
-	Type    string      `json:"type"`
-	Value   interface{} `json:"value"`
+	Channel  int64       `json:"channel"`
+	Type     string      `json:"type"`
+	Value    interface{} `json:"value"`
+	Datetime time.Time   `json:"datetime"`
 }
 
 func (c *Channel) GetHexString() (string, error) {
