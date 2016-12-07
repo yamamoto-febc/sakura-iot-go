@@ -6,8 +6,9 @@ import (
 	"net/http"
 )
 
-func Example() {
+func Example_receive() {
 
+	// Listen
 	http.Handle("/", &sakura.WebhookHandler{
 		Secret: "[put your secret]",
 		HandleFunc: func(p sakura.Payload) {
