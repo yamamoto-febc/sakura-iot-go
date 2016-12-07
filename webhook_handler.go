@@ -11,14 +11,24 @@ import (
 	"strings"
 )
 
+// WebhookHandlerFunc is type of handling request function
 type WebhookHandlerFunc func(Payload)
 
+// WebhookHandler is type to handling Webhook that receive from Sakura-IoT-platform
 type WebhookHandler struct {
-	Secret     string
+	// Secret is used to sign payload by HMAC-SHA1
+	Secret string
+
+	// HandleFunc is called when received  [type = channels] message
 	HandleFunc WebhookHandlerFunc
-	Debug      bool
+
+	// ConnectedFunc is called when received  [type = connection] message
+	ConnectedFunc WebhookHandlerFunc
+
+	Debug bool
 }
 
+// ServeHTTP is implements http.Handler interface
 func (h *WebhookHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	status := 400
 	defer func() {
@@ -58,12 +68,23 @@ func (h *WebhookHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		if h.HandleFunc == nil {
-			status = 503
-			return
+		if payload.IsChannelValue() {
+			if h.HandleFunc == nil {
+				out("[INFO] HandleFunc is nil\n")
+				return
+			}
+
+			go h.HandleFunc(payload)
 		}
 
-		go h.HandleFunc(payload)
+		if payload.IsConnection() {
+			if h.ConnectedFunc == nil {
+				out("[INFO] ConnectedFunc is nil\n")
+				return
+			}
+
+			go h.ConnectedFunc(payload)
+		}
 
 		status = 200
 	} else {

@@ -157,6 +157,9 @@ func cliCommand(option *option) func(c *cli.Context) error {
 
 		handler := &sakura_iot_go.WebhookHandler{
 			Secret: option.Secret,
+			ConnectedFunc: func(p sakura_iot_go.Payload) {
+				out("[INFO] Connected module message received:\n%#v", p)
+			},
 			HandleFunc: func(p sakura_iot_go.Payload) {
 				out("[INFO] Outgoing Webhook received:\n%#v", p)
 			},
