@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/yamamoto-febc/sakura-iot-go"
+	sakura "github.com/yamamoto-febc/sakura-iot-go"
 	"github.com/yamamoto-febc/sakura-iot-go/version"
 	"gopkg.in/urfave/cli.v2"
 	"io"
@@ -155,12 +155,12 @@ func cliCommand(option *option) func(c *cli.Context) error {
 		log.SetOutput(os.Stdout)
 		out := log.Printf
 
-		handler := &sakura_iot_go.WebhookHandler{
+		handler := &sakura.WebhookHandler{
 			Secret: option.Secret,
-			ConnectedFunc: func(p sakura_iot_go.Payload) {
+			ConnectedFunc: func(p sakura.Payload) {
 				out("[INFO] Connected module message received:\n%#v", p)
 			},
-			HandleFunc: func(p sakura_iot_go.Payload) {
+			HandleFunc: func(p sakura.Payload) {
 				out("[INFO] Outgoing Webhook received:\n%#v", p)
 			},
 			Debug: option.Debug,
