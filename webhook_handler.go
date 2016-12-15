@@ -1,4 +1,4 @@
-package sakura_iot_go
+package sakura
 
 import (
 	"bytes"

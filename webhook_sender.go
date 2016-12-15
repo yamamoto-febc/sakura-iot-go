@@ -1,4 +1,4 @@
-package sakura_iot_go
+package sakura
 
 import (
 	"bytes"
@@ -13,8 +13,10 @@ import (
 )
 
 // WebhookSendRootURL is URL prefix of send webhook target
-var WebhookSendRootURL string = "https://api.sakura.io/incoming/v1/"
-var WebhookSenderUserAgent string = fmt.Sprintf("sakura-iot-go/%s", version.Version)
+var WebhookSendRootURL = "https://api.sakura.io/incoming/v1/"
+
+// WebhookSenderUserAgent user-agent string
+var WebhookSenderUserAgent = fmt.Sprintf("sakura-iot-go/%s", version.Version)
 
 // WebhookSender is type to handling Webhook that send to Sakura-IoT-platform
 type WebhookSender struct {
@@ -22,6 +24,7 @@ type WebhookSender struct {
 	Secret string
 }
 
+// NewWebhookSender create new *WebhookSender
 func NewWebhookSender(token string, secret string) *WebhookSender {
 	return &WebhookSender{
 		Token:  token,
@@ -29,6 +32,7 @@ func NewWebhookSender(token string, secret string) *WebhookSender {
 	}
 }
 
+// Send send new request to the Incoming-Webhook on Sakura-IoT-platform
 func (w *WebhookSender) Send(p Payload) error {
 	var (
 		client = &http.Client{}
@@ -68,13 +72,13 @@ func (w *WebhookSender) Send(p Payload) error {
 
 	if resp.StatusCode == 200 {
 		return nil
-	} else {
-		data, err := ioutil.ReadAll(resp.Body)
-		if err != nil {
-			return err
-		}
-
-		return fmt.Errorf("Send webhook failed:%s", string(data))
 	}
+
+	// here, on error
+	data, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return err
+	}
+	return fmt.Errorf("Send webhook failed:%s", string(data))
 
 }

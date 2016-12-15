@@ -20,7 +20,7 @@ build-x: clean vet
 test: vet
 	govendor test $(TEST) $(TESTARGS) -v -timeout=30m -parallel=4 ;
 
-vet: fmt
+vet: golint
 	@echo "go tool vet $(VETARGS) ."
 	@go tool vet $(VETARGS) $$(ls -d */ | grep -v vendor) ; if [ $$? -eq 1 ]; then \
 		echo ""; \
@@ -29,6 +29,8 @@ vet: fmt
 		exit 1; \
 	fi
 
+golint: fmt
+	golint $(go list ./... | grep -v vendor)
 fmt:
 	gofmt -s -l -w $(GOFMT_FILES)
 

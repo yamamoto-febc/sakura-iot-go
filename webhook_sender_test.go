@@ -1,4 +1,4 @@
-package sakura_iot_go
+package sakura
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -26,12 +26,12 @@ func TestWebhookSender_Send(t *testing.T) {
 
 	sender := NewWebhookSender(token, secret)
 	p := NewPayload(module)
-	p.AddChannelByInt(0, -1)
-	p.AddChannelByInt(1, 0)
-	p.AddChannelByInt(2, 1)
-	p.AddChannelByInt(3, 255)
-	p.AddChannelByInt(4, 256)
-	p.AddChannelByInt(5, 257)
+	p.AddValueByInt(0, -1)
+	p.AddValueByInt(1, 0)
+	p.AddValueByInt(2, 1)
+	p.AddValueByInt(3, 255)
+	p.AddValueByInt(4, 256)
+	p.AddValueByInt(5, 257)
 
 	err := sender.Send(p)
 	assert.NoError(t, err)

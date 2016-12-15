@@ -2,7 +2,7 @@
 
 [さくらのIoT Platform](https://iot.sakura.ad.jp)との連携サービス用ライブラリ
 
-**This project is still developping.**
+**This project is still developing.**
 
 
 ## 概要

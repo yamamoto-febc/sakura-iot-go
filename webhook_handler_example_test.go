@@ -1,4 +1,4 @@
-package sakura_iot_go_test
+package sakura_test
 
 import (
 	"fmt"

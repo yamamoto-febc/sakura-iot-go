@@ -1,4 +1,4 @@
-package sakura_iot_go
+package sakura
 
 import (
 	"encoding/json"
@@ -161,7 +161,7 @@ func TestPayloadHandleChannels(t *testing.T) {
 	assert.Len(t, payload.Payload.Channels, 0)
 
 	// hexString
-	payload.AddChannelByHexString(0, "FF01FF01")
+	payload.AddValueByHexString(0, "FF01FF01")
 
 	assert.Len(t, payload.Payload.Channels, 1)
 	assert.EqualValues(t, payload.Payload.Channels[0].Channel, 0)
@@ -169,7 +169,7 @@ func TestPayloadHandleChannels(t *testing.T) {
 	assert.EqualValues(t, payload.Payload.Channels[0].Value, "FF01FF01")
 
 	// int32
-	payload.AddChannelByInt(1, 1)
+	payload.AddValueByInt(1, 1)
 
 	assert.Len(t, payload.Payload.Channels, 2)
 	assert.EqualValues(t, payload.Payload.Channels[1].Channel, 1)
@@ -177,7 +177,7 @@ func TestPayloadHandleChannels(t *testing.T) {
 	assert.EqualValues(t, payload.Payload.Channels[1].Value, 1)
 
 	// uint32
-	payload.AddChannelByUint(2, uint32(1))
+	payload.AddValueByUint(2, uint32(1))
 
 	assert.Len(t, payload.Payload.Channels, 3)
 	assert.EqualValues(t, payload.Payload.Channels[2].Channel, 2)
@@ -185,7 +185,7 @@ func TestPayloadHandleChannels(t *testing.T) {
 	assert.EqualValues(t, payload.Payload.Channels[2].Value, 1)
 
 	// int64
-	payload.AddChannelByInt64(3, int64(1))
+	payload.AddValueByInt64(3, int64(1))
 
 	assert.Len(t, payload.Payload.Channels, 4)
 	assert.EqualValues(t, payload.Payload.Channels[3].Channel, 3)
@@ -193,7 +193,7 @@ func TestPayloadHandleChannels(t *testing.T) {
 	assert.EqualValues(t, payload.Payload.Channels[3].Value, 1)
 
 	// uint64
-	payload.AddChannelByUint64(4, uint64(1))
+	payload.AddValueByUint64(4, uint64(1))
 
 	assert.Len(t, payload.Payload.Channels, 5)
 	assert.EqualValues(t, payload.Payload.Channels[4].Channel, 4)
@@ -201,7 +201,7 @@ func TestPayloadHandleChannels(t *testing.T) {
 	assert.EqualValues(t, payload.Payload.Channels[4].Value, 1)
 
 	// float
-	payload.AddChannelByFloat(5, float32(1))
+	payload.AddValueByFloat(5, float32(1))
 
 	assert.Len(t, payload.Payload.Channels, 6)
 	assert.EqualValues(t, payload.Payload.Channels[5].Channel, 5)
@@ -209,7 +209,7 @@ func TestPayloadHandleChannels(t *testing.T) {
 	assert.EqualValues(t, payload.Payload.Channels[5].Value, 1)
 
 	// double
-	payload.AddChannelByDouble(6, float64(1))
+	payload.AddValueByDouble(6, float64(1))
 
 	assert.Len(t, payload.Payload.Channels, 7)
 	assert.EqualValues(t, payload.Payload.Channels[6].Channel, 6)
@@ -217,6 +217,6 @@ func TestPayloadHandleChannels(t *testing.T) {
 	assert.EqualValues(t, payload.Payload.Channels[6].Value, 1)
 
 	// clear channels
-	payload.ClearChannels()
+	payload.ClearValues()
 	assert.Len(t, payload.Payload.Channels, 0)
 }
