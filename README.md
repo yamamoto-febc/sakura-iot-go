@@ -4,6 +4,9 @@
 
 **This project is still developing.**
 
+[![GoDoc](https://godoc.org/github.com/sacloud/libsacloud?status.svg)](https://godoc.org/github.com/yamamoto-febc/sakura-iot-go)
+[![Go Report Card](https://goreportcard.com/badge/github.com/sacloud/libsacloud)](https://goreportcard.com/report/github.com/yamamoto-febc/sakura-iot-go)
+
 
 ## 概要
 
